@@ -1,46 +1,107 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
+    <h1>{{msg}}</h1>
+    <h2>PvE Dailies</h2>
+
+    <ul v-for="daily in pve" :key="daily.id">
+      <li class="card">
+        <h2>{{daily.name}}</h2>
+        <img :src="daily.icon || 'https://render.guildwars2.com/file/483E3939D1A7010BDEA2970FB27703CAAD5FBB0F/42684.png'" alt="">
+        <span>{{daily.id}}</span>
+        <p>{{daily.description}}</p>
+        <p>{{daily.requirement}}</p>
+        <p>{{daily.rewards}}</p>
+        
+      </li>
     </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
+
+    <h2>PvP Dailies</h2>
+
+    <ul v-for="daily in pvp" :key="daily.id">
+      <li class="card">
+        <h2>{{daily.name}}</h2>
+        <img :src="daily.icon || 'https://render.guildwars2.com/file/483E3939D1A7010BDEA2970FB27703CAAD5FBB0F/42684.png'" alt="">
+        <span>{{daily.id}}</span>
+        <p>{{daily.description}}</p>
+        <p>{{daily.requirement}}</p>
+        <p>{{daily.rewards}}</p>
+        
+      </li>
     </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
+
+    <h2>WvW Dailies</h2>
+
+    <ul v-for="daily in wvw" :key="daily.id">
+      <li class="card">
+        <h2>{{daily.name}}</h2>
+        <img :src="daily.icon || 'https://render.guildwars2.com/file/483E3939D1A7010BDEA2970FB27703CAAD5FBB0F/42684.png'" alt="">
+        <span>{{daily.id}}</span>
+        <p>{{daily.description}}</p>
+        <p>{{daily.requirement}}</p>
+        <p>{{daily.rewards}}</p>
+        
+      </li>
     </ul>
-  </div>
+
+    <h2>Fractals Dailies</h2>
+
+    <ul v-for="daily in fractals" :key="daily.id">
+      <li class="card">
+        <h2>{{daily.name}}</h2>
+        <img :src="daily.icon || 'https://render.guildwars2.com/file/483E3939D1A7010BDEA2970FB27703CAAD5FBB0F/42684.png'" alt="">
+        <span>{{daily.id}}</span>
+        <p>{{daily.description}}</p>
+        <p>{{daily.requirement}}</p>
+        <p>{{daily.rewards}}</p>
+        
+      </li>
+    </ul>
+   </div>
 </template>
 
 <script>
+
+import axios from "axios";
+
+const API_ROOT = 'https://api.guildwars2.com'
+const ACHIEVEMENTS = '/v2/achievements'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String,
   },
+  methods: {
+ 
+  },
+  computed: {
+    pve() {
+      return this.$store.state.pve
+    },
+    pvp() {
+      return this.$store.state.pvp
+    },
+    wvw() {
+      return this.$store.state.wvw
+    },
+    fractals() {
+      return this.$store.state.fractals
+    }
+  },
+  created () {
+    let store = this.$store
+    store.dispatch('setDailies').then(()=> {
+      
+    })
+
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+/*"https://d1h9a8s8eodvjz.cloudfront.net/fonts/menomonia/08-02-12/menomonia.css"
+"https://d1h9a8s8eodvjz.cloudfront.net/fonts/menomonia/08-02-12/menomonia-italic.css"*/
 h3 {
   margin: 40px 0 0;
 }
@@ -54,5 +115,13 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.card {
+  border-radius: 4px;
+  box-shadow: 0 0 10px 1px rgba(0,0,0,0.3);
+  width: 40%;
+  padding: 40px;
+  font-family: "menomonia";
 }
 </style>
