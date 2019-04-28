@@ -4,57 +4,25 @@
     <h2>PvE Dailies</h2>
 
     <ul v-for="daily in pve" :key="daily.id">
-      <li class="card">
-        <h2>{{daily.name}}</h2>
-        <img :src="daily.icon || 'https://render.guildwars2.com/file/483E3939D1A7010BDEA2970FB27703CAAD5FBB0F/42684.png'" alt="">
-        <span>{{daily.id}}</span>
-        <p>{{daily.description}}</p>
-        <p>{{daily.requirement}}</p>
-        <p>{{daily.rewards}}</p>
-        
-      </li>
+      <Daily :daily=daily />
     </ul>
 
     <h2>PvP Dailies</h2>
 
     <ul v-for="daily in pvp" :key="daily.id">
-      <li class="card">
-        <h2>{{daily.name}}</h2>
-        <img :src="daily.icon || 'https://render.guildwars2.com/file/483E3939D1A7010BDEA2970FB27703CAAD5FBB0F/42684.png'" alt="">
-        <span>{{daily.id}}</span>
-        <p>{{daily.description}}</p>
-        <p>{{daily.requirement}}</p>
-        <p>{{daily.rewards}}</p>
-        
-      </li>
+      <Daily :daily=daily />
     </ul>
 
     <h2>WvW Dailies</h2>
 
     <ul v-for="daily in wvw" :key="daily.id">
-      <li class="card">
-        <h2>{{daily.name}}</h2>
-        <img :src="daily.icon || 'https://render.guildwars2.com/file/483E3939D1A7010BDEA2970FB27703CAAD5FBB0F/42684.png'" alt="">
-        <span>{{daily.id}}</span>
-        <p>{{daily.description}}</p>
-        <p>{{daily.requirement}}</p>
-        <p>{{daily.rewards}}</p>
-        
-      </li>
+      <Daily :daily=daily />
     </ul>
 
     <h2>Fractals Dailies</h2>
 
     <ul v-for="daily in fractals" :key="daily.id">
-      <li class="card">
-        <h2>{{daily.name}}</h2>
-        <img :src="daily.icon || 'https://render.guildwars2.com/file/483E3939D1A7010BDEA2970FB27703CAAD5FBB0F/42684.png'" alt="">
-        <span>{{daily.id}}</span>
-        <p>{{daily.description}}</p>
-        <p>{{daily.requirement}}</p>
-        <p>{{daily.rewards}}</p>
-        
-      </li>
+      <Daily :daily=daily />
     </ul>
    </div>
 </template>
@@ -62,6 +30,7 @@
 <script>
 
 import axios from "axios";
+import Daily from '@/components/Daily.vue'
 
 const API_ROOT = 'https://api.guildwars2.com'
 const ACHIEVEMENTS = '/v2/achievements'
@@ -70,6 +39,9 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String,
+  },
+  components: {
+    Daily
   },
   methods: {
  
